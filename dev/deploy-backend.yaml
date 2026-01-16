@@ -34,7 +34,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: prestasibackend
+  name: prestasibackend-service
 spec:
   selector:
     app: prestasibackend
