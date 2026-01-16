@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: prestasifrontend
 spec:
-  replicas: 5
+  replicas: 1
   selector:
     matchLabels:
       app: prestasifrontend
@@ -18,16 +18,19 @@ spec:
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 80
+          resources:
+            requests:
+              cpu: 50m
 ---
 apiVersion: v1
 kind: Service
 metadata:
   name: prestasifrontend-service
 spec:
-  type: NodePort
   selector:
     app: prestasifrontend
   ports:
     - protocol: TCP
       port: 80
       targetPort: 80
+  type: NodePort

@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: prestasibackend
 spec:
-  replicas: 5
+  replicas: 1
   selector:
     matchLabels:
       app: prestasibackend
@@ -18,6 +18,9 @@ spec:
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 3000
+          resources:
+            requests:
+              cpu: 50m
           env:
             - name: DB_HOST
               value: host.docker.internal
@@ -39,5 +42,7 @@ spec:
   selector:
     app: prestasibackend
   ports:
-    - port: 80
-      targetPort: 3000
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+  type: NodePort
