@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: prestasibackend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: prestasibackend
+  template:
+    metadata:
+      labels:
+        app: prestasibackend
+    spec:
+      containers:
+        - name: backend
+          image: prestasibackend:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 3000
+          env:
+            - name: DB_HOST
+              value: host.docker.internal
+            - name: DB_USER
+              value: root
+            - name: DB_PASS
+              value:
+            - name: DB_NAME
+              value: db_tugas
+            - name: DB_PORT
+              value: "3306"
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: prestasibackend
+spec:
+  selector:
+    app: prestasibackend
+  ports:
+    - port: 80
+      targetPort: 3000
