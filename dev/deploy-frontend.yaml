@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: prestasifrontend
 spec:
-  replicas: 1
+  replicas: 5
   selector:
     matchLabels:
       app: prestasifrontend
